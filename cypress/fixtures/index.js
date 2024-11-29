@@ -1,5 +1,3 @@
-import paco from "./example.json";
+import api21 from "./api-21.json";
 
-export const pacoTests = {
-    tests: paco
-}
+export const taskAPI21 = api21;

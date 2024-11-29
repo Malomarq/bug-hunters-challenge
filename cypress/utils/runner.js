@@ -1,17 +1,24 @@
 import { RequestManager } from "./requestManager";
 import { ResponseManager } from "./responseManager";
+import { ErrorsLogger } from "./errorsLogger";
 
 export class Runner {
-    constructor(test){
+    constructor(test) {
         this.test = test;
+        this.errorsLogger = new ErrorsLogger();
         this.requestManager = new RequestManager();
-        this.responseManager = new ResponseManager();
+        this.responseManager = new ResponseManager(this.errorsLogger);
     }
 
-    runTest(){
-        const {zod, expectedStatusCode, url, method} = this.test;
-        url && cy.wrap(this.requestManager.request({method, url})).then((response) => {
-            this.responseManager.manageResponse({response, zod, expectedStatusCode});
-        });
+    runTest() {
+        const { url, method, env, taskId, zod, expectedStatusCode } = this.test;
+        const completeUrl = `${env}${url}`;
+        cy.wrap(null).then(() => {
+            this.requestManager.request({ method, completeUrl, taskId }).then((response) => {
+                this.responseManager.manageResponse({ response, zod, expectedStatusCode });
+            });
+        }).then(() => {
+            this.errorsLogger.logErrors();
+        })
     }
 }
