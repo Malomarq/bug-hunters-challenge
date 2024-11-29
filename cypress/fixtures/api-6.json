@@ -1,0 +1,10 @@
+{
+    "taskId": "api-6",
+    "method": "GET",
+    "url": "/users?limit=5&offset=20",
+    "expectedStatusCode": 200,
+    "zod": {
+      "schema": "GETusers",
+      "validator": "api6Schema"
+    }
+  }
