@@ -8,7 +8,7 @@ export class APIschema {
     executeValidator = (options) => {
         const {response, validator, customParam} = options;
         const validate = this[validator](customParam);
-        return validate.safeParse(response);
+        return validate.safeParse(response.body);
     }
 
     constructErrorMessage = (errors) => {

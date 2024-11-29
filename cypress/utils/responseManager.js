@@ -11,16 +11,16 @@ export class ResponseManager {
 
     verifyStatusCode(options) {
         const { response, expectedStatusCode } = options;
-        if (response.statusCode !== expectedStatusCode) {
-            throw new Error(`Expected startus code for ${url}: ${expectedStatusCode}. Current status code: ${response.statusCode}`)
+        if (response.status !== expectedStatusCode) {
+            throw new Error(`Expected status code for ${response["Request URL"]}: ${expectedStatusCode}. Current status code: ${response.status}`)
         } else {
-            expect(response.statusCode).to.eq(expectedStatusCode);
+            expect(response.status).to.eq(expectedStatusCode);
         }
     }
 
     checkResponseSchema(options){
         const {response, zod} = options;
-
+        
         if(!validators[zod.schema]){
             throw new Error(`Schema not found: ${zod.schema}`);
         } else if(!validators[zod.schema]().getValidator(zod.validator)){

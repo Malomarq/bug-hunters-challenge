@@ -1,5 +1,5 @@
-import { ExampleSchema } from "./exampleSchema";
+import { GETusersSchema } from "./GETusers";
 
 export const validators = {
-    exampleSchema: () => new ExampleSchema()
+    GETusers: () => new GETusersSchema()
 }
