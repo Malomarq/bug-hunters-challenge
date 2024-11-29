@@ -7,7 +7,7 @@ export class GETusersSchema extends APIschema {
         this.api21Schema = () => {
             return z.object({
                 meta: z.object({
-                    total: z.number()
+                    total: z.number().min(1)
                 }),
                 users: z.array(
                     z.object({
