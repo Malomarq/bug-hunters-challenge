@@ -22,12 +22,7 @@ Cypress.Commands.add('deleteUser', (options) => {
     const envUrl = Cypress.env(`${env}EnvUrl`);
     const requestManager = new RequestManager();
 
-    requestManager.request({
-        method: "POST",
-        completeUrl: `${envUrl}/users/login`,
-        requestBody: { email: users.newUser.email, password: users.newUser.password },
-        taskId
-    }).then((response) => {
+    cy.getUserData(options).then((response) => {
         if (response.status === 200) {
             const userUuid = response.body.uuid;
             requestManager.request({
@@ -39,6 +34,44 @@ Cypress.Commands.add('deleteUser', (options) => {
                     cy.log(`RERUN the test. DELETE status should be 204, and it is: ${response.status}`);
                 }
             })
+        }
+    });
+});
+
+Cypress.Commands.add('createUser', (options) => {
+    const { env, taskId } = options;
+    const envUrl = Cypress.env(`${env}EnvUrl`);
+    const requestManager = new RequestManager();
+
+    requestManager.request({
+        method: "POST",
+        completeUrl: `${envUrl}/users`,
+        requestBody: users.newUser,
+        taskId
+    }).then((response) => {
+        if (response.status !== 409 && response.status !== 200) {
+            cy.log(`RERUN the test. POST status should be 200, and it is: ${response.status}`);
+        } else if (response.status === 409) {
+            cy.log('User already exists');
+        }
+    });
+});
+
+Cypress.Commands.add('getUserData', (options) => {
+    const { env, taskId } = options;
+    const envUrl = Cypress.env(`${env}EnvUrl`);
+    const requestManager = new RequestManager();
+
+    return requestManager.request({
+        method: "POST",
+        completeUrl: `${envUrl}/users/login`,
+        requestBody: { email: users.newUser.email, password: users.newUser.password },
+        taskId
+    }).then((response) => {
+        if (response.status !== 200) {
+            cy.log(`RERUN the test. POST status should be 200, and it is: ${response.status}`);
+        } else {
+            return response;
         }
     });
 });
