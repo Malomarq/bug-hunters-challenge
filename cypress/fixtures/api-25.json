@@ -1,0 +1,24 @@
+[
+    {
+        "taskId": "api-25",
+        "envAPI": "release",
+        "method": "POST",
+        "url": "/wishlist/add",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "POSTwishlist",
+            "validator": "status200Schema"
+        }
+    },
+    {
+        "taskId": "api-25",
+        "envAPI": "dev",
+        "method": "POST",
+        "url": "/wishlist/add",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "POSTwishlist",
+            "validator": "status200Schema"
+        }
+    }
+]
