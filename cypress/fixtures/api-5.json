@@ -1,0 +1,16 @@
+[
+    {
+        "taskId": "api-5",
+        "envAPI": "release",
+        "method": "POST",
+        "url": "/wishlist/add",
+        "expectedStatusCode": 200
+    },
+    {
+        "taskId": "api-5",
+        "envAPI": "dev",
+        "method": "POST",
+        "url": "/wishlist/add",
+        "expectedStatusCode": 200
+    }
+]

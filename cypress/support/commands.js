@@ -9,6 +9,17 @@ Cypress.Commands.add('instanceRunner', (test) => {
     runner.runTest();
 });
 
+Cypress.Commands.add('restoreSetup', (options) => {
+    const { env } = options;
+    const envUrl = Cypress.env(`${env}EnvUrl`);
+    const requestManager = new RequestManager();
+
+    requestManager.request({
+        method: "POST",
+        completeUrl: `${envUrl}/setup`,
+    });
+});
+
 Cypress.Commands.add('setStoredResponse', (response) => {
     storedResponse = response;
 });
@@ -104,6 +115,42 @@ Cypress.Commands.add('getGames', (options) => {
     return requestManager.request({
         method: "GET",
         completeUrl: `${envUrl}/games`,
+        taskId
+    }).then((response) => {
+        if(response.status === 200){
+            return response;
+        } else {
+            cy.log(`RERUN the test. GET status should be 200, and it is: ${response.status}`);
+        }
+    });
+});
+
+Cypress.Commands.add('getWishlist', (options) => {
+    const { env, taskId, userUuid } = options;
+    const envUrl = Cypress.env(`${env}EnvUrl`);
+    const requestManager = new RequestManager();
+
+    return requestManager.request({
+        method: "GET",
+        completeUrl: `${envUrl}/users/${userUuid}/wishlist`,
+        taskId
+    }).then((response) => {
+        if(response.status === 200){
+            return response;
+        } else {
+            cy.log(`RERUN the test. GET status should be 200, and it is: ${response.status}`);
+        }
+    });
+});
+
+Cypress.Commands.add('createPayment', (options) => {
+    const { env, taskId, userUuid, order_uuid, payment_method } = options;
+    const envUrl = Cypress.env(`${env}EnvUrl`);
+    const requestManager = new RequestManager();
+
+    return requestManager.request({
+        method: "POST",
+        completeUrl: `${envUrl}/users/${userUuid}/payments`,
         taskId
     }).then((response) => {
         if(response.status === 200){
