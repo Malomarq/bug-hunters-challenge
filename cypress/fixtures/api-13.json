@@ -1,0 +1,24 @@
+[
+    {
+        "taskId": "api-13",
+        "envAPI": "release",
+        "method": "POST",
+        "url": "/cart/change",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "POSTcartChange",
+            "validator": "status200Schema"
+        }
+    },
+    {
+        "taskId": "api-13",
+        "envAPI": "dev",
+        "method": "POST",
+        "url": "/cart/change",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "POSTcartChange",
+            "validator": "status200Schema"
+        }
+    }
+]
