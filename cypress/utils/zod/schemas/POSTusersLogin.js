@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { APIschema } from '../APISchema';
 
-export class POSTusersSchema extends APIschema {
+export class POSTusersLoginSchema extends APIschema {
     constructor() {
         super();
         this.status200Schema = () => {
