@@ -6,6 +6,7 @@ import { GETuserUuidSchema } from "./GETuserUuid";
 import { PATCHusersUuidSchema } from "./PATCHusersUuid";
 import { GETgamesSearchSchema } from "./GETgamesSearch";
 import { POSTwishlistSchema } from "./POSTwishlist";
+import { GETcartSchema } from "./GETcart";
 
 export const validators = {
     GETusers: () => new GETusersSchema(),
@@ -15,5 +16,6 @@ export const validators = {
     GETuserUuid: () => new GETuserUuidSchema(),
     PATCHusersUuid: () => new PATCHusersUuidSchema(),
     GETgamesSearch: () => new GETgamesSearchSchema(),
-    POSTwishlist: () => new POSTwishlistSchema()
+    POSTwishlist: () => new POSTwishlistSchema(),
+    GETcart: () => new GETcartSchema()
 };

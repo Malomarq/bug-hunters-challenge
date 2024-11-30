@@ -143,6 +143,25 @@ Cypress.Commands.add('getWishlist', (options) => {
     });
 });
 
+Cypress.Commands.add('addItemToCart', (options) => {
+    const { env, taskId, userUuid, itemUuid } = options;
+    const envUrl = Cypress.env(`${env}EnvUrl`);
+    const requestManager = new RequestManager();
+
+    return requestManager.request({
+        method: "POST",
+        completeUrl: `${envUrl}/users/${userUuid}/cart/add`,
+        taskId,
+        requestBody: {item_uuid: itemUuid, quantity: 1}
+    }).then((response) => {
+        if(response.status === 200){
+            return response;
+        } else {
+            cy.log(`RERUN the test. GET status should be 200, and it is: ${response.status}`);
+        }
+    });
+});
+
 Cypress.Commands.add('createPayment', (options) => {
     const { env, taskId, userUuid, order_uuid, payment_method } = options;
     const envUrl = Cypress.env(`${env}EnvUrl`);
