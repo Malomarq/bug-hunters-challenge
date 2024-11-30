@@ -2,7 +2,7 @@ export class RequestManager {
     constructor() { }
 
     request(options) {
-        const { method, completeUrl, taskId } = options;
+        const { method, completeUrl, requestBody = {}, taskId } = options;
         const additionalHeaders = {
             Authorization: Cypress.env("bearerToken"),
             "X-Task-Id": taskId
@@ -10,6 +10,7 @@ export class RequestManager {
         return cy.request({ 
             method, 
             url: completeUrl, 
+            body: requestBody,
             headers: additionalHeaders, 
             failOnStatusCode: false 
         }).then((response) => {
