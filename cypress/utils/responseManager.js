@@ -14,7 +14,7 @@ export class ResponseManager {
     verifyStatusCode(options) {
         const { response, expectedStatusCode } = options;
         if (response.status !== expectedStatusCode) {
-            this.errorsLogger.throwErrors(`Expected status code for ${response["Request URL"]}: ${expectedStatusCode}. Current status code: ${response.status}`);
+            this.errorsLogger.throwErrors(`Expected status code: ${expectedStatusCode}. Current status code: ${response.status}`);
         } else {
             expect(response.status).to.eq(expectedStatusCode);
         }

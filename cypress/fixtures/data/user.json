@@ -1,0 +1,8 @@
+{
+    "newUser": {
+        "email": "spongeBob@gmail.com",
+        "password": "passwordspongeBob",
+        "name": "SpongeBob",
+        "nickname": "SpongeBobSquarePants"
+    }
+}
