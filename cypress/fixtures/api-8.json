@@ -1,0 +1,24 @@
+[
+    {
+        "taskId": "api-8",
+        "envAPI": "release",
+        "method": "POST",
+        "url": "/wishlist/remove",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "POSTwishlist",
+            "validator": "removeItemSchema"
+        }
+    },
+    {
+        "taskId": "api-8",
+        "envAPI": "dev",
+        "method": "POST",
+        "url": "/wishlist/remove",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "POSTwishlist",
+            "validator": "removeItemSchema"
+        }
+    }
+]

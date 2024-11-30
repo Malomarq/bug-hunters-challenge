@@ -5,6 +5,7 @@ import { POSTusersLoginSchema } from "./POSTusersLogin";
 import { GETuserUuidSchema } from "./GETuserUuid";
 import { PATCHusersUuidSchema } from "./PATCHusersUuid";
 import { GETgamesSearchSchema } from "./GETgamesSearch";
+import { POSTwishlistSchema } from "./POSTwishlist";
 
 export const validators = {
     GETusers: () => new GETusersSchema(),
@@ -13,5 +14,6 @@ export const validators = {
     POSTusersLogin: () => new POSTusersLoginSchema(),
     GETuserUuid: () => new GETuserUuidSchema(),
     PATCHusersUuid: () => new PATCHusersUuidSchema(),
-    GETgamesSearch: () => new GETgamesSearchSchema()
+    GETgamesSearch: () => new GETgamesSearchSchema(),
+    POSTwishlist: () => new POSTwishlistSchema()
 };
