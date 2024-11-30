@@ -22,5 +22,5 @@ describe("Task id: api-10", () => {
     };
 
     runTestForEnv("release");
-    runTestForEnv("dev");
+    runTestForEnv("dev"); // DEV env: los resultados son distintos en ambos env. Debería llegar el juego ""
 });
