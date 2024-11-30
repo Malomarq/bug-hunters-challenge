@@ -1,0 +1,24 @@
+[
+    {
+        "taskId": "api-2",
+        "envAPI": "release",
+        "method": "GET",
+        "url": "/games/search?query=red",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "GETgamesSearch",
+            "validator": "status200Schema"
+        }
+    },
+    {
+        "taskId": "api-2",
+        "envAPI": "dev",
+        "method": "GET",
+        "url": "/games/search?query=red",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "GETgamesSearch",
+            "validator": "status200Schema"
+        }
+    }
+]
