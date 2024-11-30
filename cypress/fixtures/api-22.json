@@ -1,0 +1,10 @@
+{
+    "taskId": "api-22",
+    "method": "POST",
+    "url": "/users",
+    "expectedStatusCode": 200,
+    "zod": {
+      "schema": "POSTusers",
+      "validator": "status200Schema"
+    }
+  }
