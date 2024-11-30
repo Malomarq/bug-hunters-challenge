@@ -13,12 +13,14 @@ export class Runner {
     runTest() {
         const { url, method, env, requestBody, taskId, zod, expectedStatusCode } = this.test;
         const completeUrl = `${env}${url}`;
+        const compareResponsesBetweenEnvs = zod.compareResponsesBetweenEnvs || false;
         cy.wrap(null).then(() => {
             this.requestManager.request({ method, completeUrl, requestBody, taskId }).then((response) => {
-                this.responseManager.manageResponse({ response, zod, expectedStatusCode });
+                this.responseManager.manageResponse({ response, zod, expectedStatusCode, compareResponsesBetweenEnvs });
             });
-        }).then(() => {
+        }).then((response) => {
+            compareResponsesBetweenEnvs && cy.setStoredResponse(response);
             this.errorsLogger.logErrors();
-        })
+        });
     }
 }

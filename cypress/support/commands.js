@@ -2,10 +2,20 @@ import { Runner } from "../utils/runner";
 import users from "../fixtures/data/user.json";
 import { RequestManager } from "../utils/requestManager";
 
+let storedResponse;
+
 Cypress.Commands.add('instanceRunner', (test) => {
     const runner = new Runner(test);
     runner.runTest();
-})
+});
+
+Cypress.Commands.add('setStoredResponse', (response) => {
+    storedResponse = response;
+});
+
+Cypress.Commands.add('getStoredResponse', () => {
+    return storedResponse;
+});
 
 Cypress.Commands.add('deleteUser', (options) => {
     const { env, taskId } = options;
