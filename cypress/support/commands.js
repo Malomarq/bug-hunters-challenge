@@ -50,7 +50,7 @@ Cypress.Commands.add('createUser', (options) => {
         taskId
     }).then((response) => {
         if (response.status !== 409 && response.status !== 200) {
-            cy.log(`RERUN the test. POST status should be 200, and it is: ${response.status}`);
+            cy.log(`RERUN the test. POST status should be 200 or 409, and it is: ${response.status}`);
         } else if (response.status === 409) {
             cy.log('User already exists');
         }
@@ -68,10 +68,28 @@ Cypress.Commands.add('getUserData', (options) => {
         requestBody: { email: users.newUser.email, password: users.newUser.password },
         taskId
     }).then((response) => {
-        if (response.status !== 200) {
-            cy.log(`RERUN the test. POST status should be 200, and it is: ${response.status}`);
+        if (response.status !== 404 && response.status !== 200) {
+            cy.log(`RERUN the test. POST status should be 200 or 404, and it is: ${response.status}`);
         } else {
             return response;
+        }
+    });
+});
+
+Cypress.Commands.add('getUsers', (options) => {
+    const { env, taskId } = options;
+    const envUrl = Cypress.env(`${env}EnvUrl`);
+    const requestManager = new RequestManager();
+
+    return requestManager.request({
+        method: "GET",
+        completeUrl: `${envUrl}/users`,
+        taskId
+    }).then((response) => {
+        if(response.status === 200){
+            return response;
+        } else {
+            cy.log(`RERUN the test. GET status should be 200, and it is: ${response.status}`);
         }
     });
 });
