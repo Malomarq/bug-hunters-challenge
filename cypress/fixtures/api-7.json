@@ -1,10 +1,10 @@
 {
-    "taskId": "api-3",
+    "taskId": "api-7",
     "method": "POST",
-    "url": "/users",
+    "url": "/users/login",
     "expectedStatusCode": 200,
     "zod": {
-      "schema": "POSTusers",
+      "schema": "POSTusersLogin",
       "validator": "status200Schema"
     }
   }
