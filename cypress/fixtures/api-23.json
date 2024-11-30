@@ -1,5 +1,18 @@
-{
+[
+  {
     "taskId": "api-23",
+    "envAPI": "release",
+    "method": "GET",
+    "url": "/users/",
+    "expectedStatusCode": 200,
+    "zod": {
+      "schema": "GETuserUuid",
+      "validator": "api23Schema"
+    }
+  },
+  {
+    "taskId": "api-23",
+    "envAPI": "dev",
     "method": "GET",
     "url": "/users/",
     "expectedStatusCode": 200,
@@ -8,3 +21,4 @@
       "validator": "api23Schema"
     }
   }
+]

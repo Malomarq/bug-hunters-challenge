@@ -1,6 +1,16 @@
-{
+[
+  {
     "taskId": "api-1",
+    "envAPI": "release",
+    "method": "DELETE",
+    "url": "/users/",
+    "expectedStatusCode": 204
+  },
+  {
+    "taskId": "api-1",
+    "envAPI": "dev",
     "method": "DELETE",
     "url": "/users/",
     "expectedStatusCode": 204
   }
+]

@@ -1,5 +1,18 @@
-{
+[
+  {
     "taskId": "api-6",
+    "envAPI": "release",
+    "method": "GET",
+    "url": "/users?limit=5&offset=20",
+    "expectedStatusCode": 200,
+    "zod": {
+      "schema": "GETusers",
+      "validator": "api6Schema"
+    }
+  },
+  {
+    "taskId": "api-6",
+    "envAPI": "dev",
     "method": "GET",
     "url": "/users?limit=5&offset=20",
     "expectedStatusCode": 200,
@@ -8,3 +21,4 @@
       "validator": "api6Schema"
     }
   }
+]

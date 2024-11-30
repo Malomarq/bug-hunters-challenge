@@ -1,5 +1,18 @@
-{
+[
+  {
     "taskId": "api-22",
+    "envAPI": "release",
+    "method": "POST",
+    "url": "/users",
+    "expectedStatusCode": 200,
+    "zod": {
+      "schema": "POSTusers",
+      "validator": "status200Schema"
+    }
+  },
+  {
+    "taskId": "api-22",
+    "envAPI": "dev",
     "method": "POST",
     "url": "/users",
     "expectedStatusCode": 200,
@@ -8,3 +21,4 @@
       "validator": "status200Schema"
     }
   }
+]

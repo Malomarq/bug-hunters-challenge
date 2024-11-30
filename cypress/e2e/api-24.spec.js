@@ -1,7 +1,7 @@
-import { taskAPI23 } from "../fixtures";
+import { taskAPI24 } from "../fixtures";
 
-describe("Task id: api-23", () => {
-    const tests = taskAPI23;
+describe("Task id: api-24", () => {
+    const tests = taskAPI24;
 
     tests.forEach((test) => {
         it(`[${test.taskId}] - ${test.envAPI} env`, () => {
@@ -9,6 +9,8 @@ describe("Task id: api-23", () => {
                 const firstUsersData = getUsersData.body.users[0].uuid;
                 test.env = Cypress.env(`${test.envAPI}EnvUrl`);
                 test.url = `${test.url}${firstUsersData}`;
+                const date = new Date().getMilliseconds();
+                test.requestBody = { name: `Rosalia${date}` };
                 cy.instanceRunner(test);
             });
         });

@@ -1,10 +1,24 @@
-{
-  "taskId": "api-21",
-  "method": "GET",
-  "url": "/users",
-  "expectedStatusCode": 200,
-  "zod": {
-    "schema": "GETusers",
-    "validator": "api21Schema"
+[
+  {
+    "taskId": "api-21",
+    "envAPI": "release",
+    "method": "GET",
+    "url": "/users",
+    "expectedStatusCode": 200,
+    "zod": {
+      "schema": "GETusers",
+      "validator": "api21Schema"
+    }
+  },
+  {
+    "taskId": "api-21",
+    "envAPI": "dev",
+    "method": "GET",
+    "url": "/users",
+    "expectedStatusCode": 200,
+    "zod": {
+      "schema": "GETusers",
+      "validator": "api21Schema"
+    }
   }
-}
+]

@@ -1,25 +1,25 @@
 import { taskAPI1 } from "../fixtures";
 
 describe("Task id: api-1", () => {
-    const test = taskAPI1;
+    const tests = taskAPI1;
 
-    const buildSetup = (env) => {
-        cy.createUser({ env, taskId: test.taskId });
+    const buildSetup = (options) => {
+        const { env, taskId } = options;
+        cy.createUser({ env, taskId });
     };
 
-    const runTestForEnv = (env) => {
-        it(`[${test.taskId}] - ${env} env`, () => {
-            cy.wrap(buildSetup(env)).then(() => {
-                cy.getUserData({ env, taskId: test.taskId }).then((userData) => {
+    tests.forEach((test) => {
+        it(`[${test.taskId}] - ${test.envAPI} env`, () => {
+            cy.wrap(buildSetup({ env: test.envAPI, taskId: test.taskId })).then(() => {
+                cy.getUserData({ env: test.envAPI, taskId: test.taskId }).then((userData) => {
                     const userUuid = userData.body.uuid;
-                    test.env = Cypress.env(`${env}EnvUrl`);
+                    test.env = Cypress.env(`${test.envAPI}EnvUrl`);
                     test.url = `${test.url}${userUuid}`;
                     cy.instanceRunner(test);
                 });
             });
         });
-    }
+    });
 
-    runTestForEnv("release");
-    runTestForEnv("dev"); // DEV env: status 400 porque interpreta el uuid como de más de 36 digítos, lo que es incorrecto
+    // DEV env: status 500
 });
