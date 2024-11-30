@@ -1,0 +1,24 @@
+[
+    {
+        "taskId": "api-15",
+        "envAPI": "release",
+        "method": "POST",
+        "url": "/cart/clear",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "POSTcartRemove",
+            "validator": "clearCartSchema"
+        }
+    },
+    {
+        "taskId": "api-15",
+        "envAPI": "dev",
+        "method": "POST",
+        "url": "/cart/clear",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "POSTcartRemove",
+            "validator": "clearCartSchema"
+        }
+    }
+]

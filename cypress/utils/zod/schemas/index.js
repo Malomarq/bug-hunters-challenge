@@ -8,6 +8,7 @@ import { GETgamesSearchSchema } from "./GETgamesSearch";
 import { POSTwishlistSchema } from "./POSTwishlist";
 import { GETcartSchema } from "./GETcart";
 import { POSTcartChangeSchema } from "./POSTcartChange";
+import { POSTcartRemoveSchema } from "./POSTcartRemove";
 
 export const validators = {
     GETusers: () => new GETusersSchema(),
@@ -19,5 +20,6 @@ export const validators = {
     GETgamesSearch: () => new GETgamesSearchSchema(),
     POSTwishlist: () => new POSTwishlistSchema(),
     GETcart: () => new GETcartSchema(),
-    POSTcartChange: () => new POSTcartChangeSchema()
+    POSTcartChange: () => new POSTcartChangeSchema(),
+    POSTcartRemove: () => new POSTcartRemoveSchema()
 };
