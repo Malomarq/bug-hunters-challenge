@@ -1,0 +1,16 @@
+[
+    {
+        "taskId": "api-9",
+        "envAPI": "release",
+        "method": "GET",
+        "url": "/games/",
+        "expectedStatusCode": 200
+    },
+    {
+        "taskId": "api-9",
+        "envAPI": "dev",
+        "method": "GET",
+        "url": "/games/",
+        "expectedStatusCode": 200
+    }
+]

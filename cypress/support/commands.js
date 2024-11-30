@@ -95,3 +95,21 @@ Cypress.Commands.add('getUsers', (options) => {
         }
     });
 });
+
+Cypress.Commands.add('getGames', (options) => {
+    const { env, taskId } = options;
+    const envUrl = Cypress.env(`${env}EnvUrl`);
+    const requestManager = new RequestManager();
+
+    return requestManager.request({
+        method: "GET",
+        completeUrl: `${envUrl}/games`,
+        taskId
+    }).then((response) => {
+        if(response.status === 200){
+            return response;
+        } else {
+            cy.log(`RERUN the test. GET status should be 200, and it is: ${response.status}`);
+        }
+    });
+});
