@@ -1,0 +1,11 @@
+{
+    "taskId": "api-10",
+    "method": "GET",
+    "preRequest": "/categories",
+    "lastRequest": "/games?limit=1&offset=1",
+    "expectedStatusCode": 200,
+    "zod": {
+      "schema": "GETcategoriesUuidGames",
+      "validator": "api10Schema"
+    }
+  }
