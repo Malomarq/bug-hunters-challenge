@@ -43,7 +43,7 @@ Cypress.Commands.add('createUser', (options) => {
     const envUrl = Cypress.env(`${env}EnvUrl`);
     const requestManager = new RequestManager();
 
-    requestManager.request({
+    return requestManager.request({
         method: "POST",
         completeUrl: `${envUrl}/users`,
         requestBody: users.newUser,
@@ -53,6 +53,8 @@ Cypress.Commands.add('createUser', (options) => {
             cy.log(`RERUN the test. POST status should be 200 or 409, and it is: ${response.status}`);
         } else if (response.status === 409) {
             cy.log('User already exists');
+        } else {
+            return response;
         }
     });
 });

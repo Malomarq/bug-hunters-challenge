@@ -1,0 +1,24 @@
+[
+    {
+        "taskId": "api-4",
+        "envAPI": "release",
+        "method": "PATCH",
+        "url": "/users/",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "PATCHusersUuid",
+            "validator": "status200Schema"
+        }
+    },
+    {
+        "taskId": "api-4",
+        "envAPI": "dev",
+        "method": "PATCH",
+        "url": "/users/",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "PATCHusersUuid",
+            "validator": "status200Schema"
+        }
+    }
+]
