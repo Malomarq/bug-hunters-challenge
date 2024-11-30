@@ -8,7 +8,7 @@ export class ResponseManager {
     manageResponse(options) {
         const { response, zod, expectedStatusCode } = options;
         this.verifyStatusCode({ response, expectedStatusCode });
-        this.checkResponseSchema({ response, zod });
+        zod && this.checkResponseSchema({ response, zod });
         cy.wrap(response).then(() => {
             return response
         });

@@ -1,0 +1,6 @@
+{
+    "taskId": "api-1",
+    "method": "DELETE",
+    "url": "/users/",
+    "expectedStatusCode": 204
+  }

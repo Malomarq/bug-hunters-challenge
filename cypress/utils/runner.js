@@ -13,7 +13,7 @@ export class Runner {
     runTest() {
         const { url, method, env, requestBody, taskId, zod, expectedStatusCode } = this.test;
         const completeUrl = `${env}${url}`;
-        const compareResponsesBetweenEnvs = zod.compareResponsesBetweenEnvs || false;
+        const compareResponsesBetweenEnvs = zod?.compareResponsesBetweenEnvs || false;
         cy.wrap(null).then(() => {
             this.requestManager.request({ method, completeUrl, requestBody, taskId }).then((response) => {
                 this.responseManager.manageResponse({ response, zod, expectedStatusCode, compareResponsesBetweenEnvs });
