@@ -3,17 +3,11 @@ import { taskAPI6 } from "../fixtures";
 describe("Task id: api-6", () => {
     const tests = taskAPI6;
 
-    const buildSetup = (options) => {
-        const { env, taskId } = options;
-        cy.deleteUser({ env, taskId });
-    };
-
     tests.forEach((test) => {
         it(`[${test.taskId}] - ${test.envAPI} env`, () => {
-            cy.wrap(buildSetup({ env: test.envAPI, taskId: test.taskId })).then(() => {
-                test.env = Cypress.env(`${test.envAPI}EnvUrl`);
-                cy.instanceRunner(test);
-            });
+            cy.restoreSetup({ env: test.envAPI });
+            test.env = Cypress.env(`${test.envAPI}EnvUrl`);
+            cy.instanceRunner(test);
         });
     });
 

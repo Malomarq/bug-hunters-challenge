@@ -29,22 +29,16 @@ Cypress.Commands.add('getStoredResponse', () => {
 });
 
 Cypress.Commands.add('deleteUser', (options) => {
-    const { env, taskId } = options;
+    const { env, taskId, userUuid } = options;
     const envUrl = Cypress.env(`${env}EnvUrl`);
     const requestManager = new RequestManager();
-
-    cy.getUserData(options).then((response) => {
-        if (response.status === 200) {
-            const userUuid = response.body.uuid;
-            requestManager.request({
-                method: "DELETE",
-                completeUrl: `${envUrl}/users/${userUuid}`,
-                taskId
-            }).then((response) => {
-                if (response.status !== 204) {
-                    cy.log(`RERUN the test. DELETE status should be 204, and it is: ${response.status}`);
-                }
-            })
+    requestManager.request({
+        method: "DELETE",
+        completeUrl: `${envUrl}/users/${userUuid}`,
+        taskId
+    }).then((response) => {
+        if (response.status !== 204) {
+            cy.log(`RERUN the test. DELETE status should be 204, and it is: ${response.status}`);
         }
     });
 });
@@ -64,6 +58,25 @@ Cypress.Commands.add('createUser', (options) => {
             cy.log(`RERUN the test. POST status should be 200 or 409, and it is: ${response.status}`);
         } else if (response.status === 409) {
             cy.log('User already exists');
+        } else {
+            return response;
+        }
+    });
+});
+
+Cypress.Commands.add('updateUser', (options) => {
+    const { env, taskId, userUuid, updateData } = options;
+    const envUrl = Cypress.env(`${env}EnvUrl`);
+    const requestManager = new RequestManager();
+
+    return requestManager.request({
+        method: "PATCH",
+        completeUrl: `${envUrl}/users/${userUuid}`,
+        requestBody: updateData,
+        taskId
+    }).then((response) => {
+        if (response.status !== 200) {
+            cy.log(`RERUN the test. PATCH status should be 200 and it is: ${response.status}`);
         } else {
             return response;
         }
@@ -236,6 +249,24 @@ Cypress.Commands.add('createPayment', (options) => {
             return response;
         } else {
             cy.log(`RERUN the test. POST status should be 200, and it is: ${response.status}`);
+        }
+    });
+});
+
+Cypress.Commands.add('deletePayment', (options) => {
+    const { env, taskId, paymentUuid } = options;
+    const envUrl = Cypress.env(`${env}EnvUrl`);
+    const requestManager = new RequestManager();
+
+    return requestManager.request({
+        method: "DELETE",
+        completeUrl: `${envUrl}/payments/${paymentUuid}`,
+        taskId
+    }).then((response) => {
+        if (response.status === 204) {
+            return response;
+        } else {
+            cy.log(`RERUN the test. DELETE status should be 204, and it is: ${response.status}`);
         }
     });
 });
