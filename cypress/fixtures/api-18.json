@@ -1,0 +1,24 @@
+[
+    {
+        "taskId": "api-18",
+        "envAPI": "release",
+        "method": "PATCH",
+        "url": "/status",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "Orders",
+            "validator": "updateStatusSchema"
+        }
+    },
+    {
+        "taskId": "api-18",
+        "envAPI": "dev",
+        "method": "PATCH",
+        "url": "/status",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "Orders",
+            "validator": "updateStatusSchema"
+        }
+    }
+]
