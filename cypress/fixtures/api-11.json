@@ -1,0 +1,24 @@
+[
+    {
+        "taskId": "api-11",
+        "envAPI": "release",
+        "method": "GET",
+        "url": "/users/",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "GETusers",
+            "validator": "getUserData"
+        }
+    },
+    {
+        "taskId": "api-11",
+        "envAPI": "dev",
+        "method": "GET",
+        "url": "/users/",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "GETusers",
+            "validator": "getUserData"
+        }
+    }
+]
