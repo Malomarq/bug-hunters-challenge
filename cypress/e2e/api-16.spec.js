@@ -10,24 +10,30 @@ describe("Task id: api-16", () => {
                 const firstUserUuid = allUsers.body.users[0].uuid;
                 cy.getGames({ env: test.envAPI, taskId: test.taskId }).then((allGames) => {
                     const firstGameUuid = allGames.body.games[0].uuid;
-                    // cy.addItemToCart({ env: test.envAPI, taskId: test.taskId, userUuid: firstUserUuid, itemUuid: firstGameUuid }).then((response) => {
-                    //    console.log(response);
-                    const items = [
+                    const cartItems =
+                    {
+                        item_uuid: firstGameUuid,
+                        quantity: 2,
+                    };
+                    cy.addItemToCart({ env: test.envAPI, taskId: test.taskId, userUuid: firstUserUuid, cartItems }).then((response) => {
+                        test.env = Cypress.env(`${test.envAPI}EnvUrl`);
+                        test.url = `/users/${firstUserUuid}${test.url}`;
+                        test.requestBody = {
+                            items: [{
+                                item_uuid: firstGameUuid,
+                                quantity: 2,
+                            },
                             {
-                            item_uuid: firstGameUuid,
-                            quantity: 2,
-                        }
-                    ];
-                   // cy.createOrder({ env:test.envAPI, taskId: test.taskId, userUuid: firstUserUuid, items });
-                    test.env = Cypress.env(`${test.envAPI}EnvUrl`);
-                    test.url = `/users/${firstUserUuid}${test.url}`;
-                    test.requestBody = {items};
-                    cy.instanceRunner(test);
-                    //});
+                                item_uuid: firstGameUuid,
+                                quantity: 1,
+                            }]
+                        };
+                        cy.instanceRunner(test);
+                    });
                 });
             });
         });
     });
 
-    // DEV env:
+    // DEV env: en release no se puede meter items duplicados en el array de items, pero en dev sí
 });

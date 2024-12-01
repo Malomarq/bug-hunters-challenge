@@ -4,10 +4,10 @@
         "envAPI": "release",
         "method": "POST",
         "url": "/orders",
-        "expectedStatusCode": 200,
+        "expectedStatusCode": 400,
         "zod": {
             "schema": "Orders",
-            "validator": "createOrderSchema"
+            "validator": "createOrderErrorSchema"
         }
     },
     {
@@ -15,10 +15,10 @@
         "envAPI": "dev",
         "method": "POST",
         "url": "/orders",
-        "expectedStatusCode": 200,
+        "expectedStatusCode": 400,
         "zod": {
             "schema": "Orders",
-            "validator": "createOrderSchema"
+            "validator": "createOrderErrorSchema"
         }
     }
 ]

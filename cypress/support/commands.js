@@ -144,7 +144,7 @@ Cypress.Commands.add('getWishlist', (options) => {
 });
 
 Cypress.Commands.add('addItemToCart', (options) => {
-    const { env, taskId, userUuid, itemUuid } = options;
+    const { env, taskId, userUuid, cartItems } = options;
     const envUrl = Cypress.env(`${env}EnvUrl`);
     const requestManager = new RequestManager();
 
@@ -152,7 +152,7 @@ Cypress.Commands.add('addItemToCart', (options) => {
         method: "POST",
         completeUrl: `${envUrl}/users/${userUuid}/cart/add`,
         taskId,
-        requestBody: {item_uuid: itemUuid, quantity: 1}
+        requestBody: cartItems
     }).then((response) => {
         if(response.status === 200){
             return response;
