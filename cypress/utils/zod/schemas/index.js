@@ -10,6 +10,7 @@ import { GETcartSchema } from "./GETcart";
 import { POSTcartChangeSchema } from "./POSTcartChange";
 import { POSTcartRemoveSchema } from "./POSTcartRemove";
 import { OrdersSchema } from "./Orders";
+import { PaymentsSchema } from "./Payments";
 
 export const validators = {
     GETusers: () => new GETusersSchema(),
@@ -23,5 +24,6 @@ export const validators = {
     GETcart: () => new GETcartSchema(),
     POSTcartChange: () => new POSTcartChangeSchema(),
     POSTcartRemove: () => new POSTcartRemoveSchema(),
-    Orders: () => new OrdersSchema()
+    Orders: () => new OrdersSchema(),
+    Payments: () => new PaymentsSchema()
 };

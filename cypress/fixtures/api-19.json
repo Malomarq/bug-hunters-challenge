@@ -1,0 +1,24 @@
+[
+    {
+        "taskId": "api-19",
+        "envAPI": "release",
+        "method": "GET",
+        "url": "/payments/",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "Payments",
+            "validator": "getPaymentSchema"
+        }
+    },
+    {
+        "taskId": "api-19",
+        "envAPI": "dev",
+        "method": "GET",
+        "url": "/payments/",
+        "expectedStatusCode": 200,
+        "zod": {
+            "schema": "Payments",
+            "validator": "getPaymentSchema"
+        }
+    }
+]

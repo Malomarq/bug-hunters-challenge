@@ -99,7 +99,7 @@ Cypress.Commands.add('getUsers', (options) => {
         completeUrl: `${envUrl}/users`,
         taskId
     }).then((response) => {
-        if(response.status === 200){
+        if (response.status === 200) {
             return response;
         } else {
             cy.log(`RERUN the test. GET status should be 200, and it is: ${response.status}`);
@@ -117,7 +117,7 @@ Cypress.Commands.add('getGames', (options) => {
         completeUrl: `${envUrl}/games`,
         taskId
     }).then((response) => {
-        if(response.status === 200){
+        if (response.status === 200) {
             return response;
         } else {
             cy.log(`RERUN the test. GET status should be 200, and it is: ${response.status}`);
@@ -135,7 +135,7 @@ Cypress.Commands.add('getWishlist', (options) => {
         completeUrl: `${envUrl}/users/${userUuid}/wishlist`,
         taskId
     }).then((response) => {
-        if(response.status === 200){
+        if (response.status === 200) {
             return response;
         } else {
             cy.log(`RERUN the test. GET status should be 200, and it is: ${response.status}`);
@@ -154,7 +154,7 @@ Cypress.Commands.add('addItemToCart', (options) => {
         taskId,
         requestBody: cartItems
     }).then((response) => {
-        if(response.status === 200){
+        if (response.status === 200) {
             return response;
         } else {
             cy.log(`RERUN the test. GET status should be 200, and it is: ${response.status}`);
@@ -163,7 +163,7 @@ Cypress.Commands.add('addItemToCart', (options) => {
 });
 
 Cypress.Commands.add('createOrder', (options) => {
-    const { env, taskId, userUuid, items } = options;
+    const { env, taskId, userUuid, orderItems } = options;
     const envUrl = Cypress.env(`${env}EnvUrl`);
     const requestManager = new RequestManager();
 
@@ -171,9 +171,9 @@ Cypress.Commands.add('createOrder', (options) => {
         method: "POST",
         completeUrl: `${envUrl}/users/${userUuid}/orders`,
         taskId,
-        requestBody: {items}
+        requestBody: orderItems
     }).then((response) => {
-        if(response.status === 200){
+        if (response.status === 200) {
             return response;
         } else {
             cy.log(`RERUN the test. GET status should be 200, and it is: ${response.status}`);
@@ -181,20 +181,61 @@ Cypress.Commands.add('createOrder', (options) => {
     });
 });
 
+Cypress.Commands.add('updateOrder', (options) => {
+    const { env, taskId, orderUuid, orderStatus } = options;
+    const envUrl = Cypress.env(`${env}EnvUrl`);
+    const requestManager = new RequestManager();
+
+    return requestManager.request({
+        method: "PATCH",
+        completeUrl: `${envUrl}/orders/${orderUuid}/status`,
+        taskId,
+        requestBody: { status: orderStatus }
+    }).then((response) => {
+        if (response.status === 200) {
+            return response;
+        } else {
+            cy.log(`RERUN the test. PATCH status should be 200, and it is: ${response.status}`);
+        }
+    });
+});
+
+Cypress.Commands.add('deleteOrder', (options) => {
+    const { env, taskId, orderUuid, keepPayments } = options;
+    const envUrl = Cypress.env(`${env}EnvUrl`);
+    const requestManager = new RequestManager();
+
+    return requestManager.request({
+        method: "DELETE",
+        completeUrl: `${envUrl}/orders/${orderUuid}${keepPayments ? '?keep_payments=true' : ''}`,
+        taskId
+    }).then((response) => {
+        if (response.status === 204) {
+            return response;
+        } else {
+            cy.log(`RERUN the test. DELETE status should be 204, and it is: ${response.status}`);
+        }
+    });
+});
+
 Cypress.Commands.add('createPayment', (options) => {
-    const { env, taskId, userUuid, order_uuid, payment_method } = options;
+    const { env, taskId, userUuid, orderUuid, paymentMethod } = options;
     const envUrl = Cypress.env(`${env}EnvUrl`);
     const requestManager = new RequestManager();
 
     return requestManager.request({
         method: "POST",
         completeUrl: `${envUrl}/users/${userUuid}/payments`,
-        taskId
+        taskId,
+        requestBody: {
+            order_uuid: orderUuid,
+            payment_method: paymentMethod
+        }
     }).then((response) => {
-        if(response.status === 200){
+        if (response.status === 200) {
             return response;
         } else {
-            cy.log(`RERUN the test. GET status should be 200, and it is: ${response.status}`);
+            cy.log(`RERUN the test. POST status should be 200, and it is: ${response.status}`);
         }
     });
 });
