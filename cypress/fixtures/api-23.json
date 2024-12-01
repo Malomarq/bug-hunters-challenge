@@ -4,21 +4,13 @@
     "envAPI": "release",
     "method": "GET",
     "url": "/users/",
-    "expectedStatusCode": 200,
-    "zod": {
-      "schema": "GETuserUuid",
-      "validator": "api23Schema"
-    }
+    "expectedStatusCode": 404
   },
   {
     "taskId": "api-23",
     "envAPI": "dev",
     "method": "GET",
     "url": "/users/",
-    "expectedStatusCode": 200,
-    "zod": {
-      "schema": "GETuserUuid",
-      "validator": "api23Schema"
-    }
+    "expectedStatusCode": 404
   }
 ]

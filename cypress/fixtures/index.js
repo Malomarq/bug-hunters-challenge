@@ -22,6 +22,7 @@ import api16 from "./api-16.json";
 import api11 from "./api-11.json";
 import api17 from "./api-17.json";
 import api19 from "./api-19.json";
+import api18 from "./api-18.json";
 
 export const taskAPI21 = api21;
 export const taskAPI6 = api6;
@@ -47,3 +48,4 @@ export const taskAPI16 = api16;
 export const taskAPI11 = api11;
 export const taskAPI17 = api17;
 export const taskAPI19 = api19;
+export const taskAPI18 = api18;
