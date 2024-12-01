@@ -11,8 +11,18 @@ describe("Task id: api-14", () => {
                 cy.getGames({ env: test.envAPI, taskId: test.taskId }).then((allGames) => {
                     const firstGameUuid = allGames.body.games[0].uuid;
                     const secondGameUuid = allGames.body.games[1].uuid;
-                    cy.addItemToCart({ env: test.envAPI, taskId: test.taskId, userUuid: firstUserUuid, itemUuid: firstGameUuid });
-                    cy.addItemToCart({ env: test.envAPI, taskId: test.taskId, userUuid: firstUserUuid, itemUuid: secondGameUuid });
+                    const firstCartItem =
+                    {
+                        item_uuid: firstGameUuid,
+                        quantity: 2,
+                    };
+                    const secondCartItem =
+                    {
+                        item_uuid: secondGameUuid,
+                        quantity: 1,
+                    };
+                    cy.addItemToCart({ env: test.envAPI, taskId: test.taskId, userUuid: firstUserUuid, cartItems: firstCartItem });
+                    cy.addItemToCart({ env: test.envAPI, taskId: test.taskId, userUuid: firstUserUuid, cartItems: secondCartItem });
                     test.env = Cypress.env(`${test.envAPI}EnvUrl`);
                     test.url = `/users/${firstUserUuid}${test.url}`;
                     test.requestBody = {
