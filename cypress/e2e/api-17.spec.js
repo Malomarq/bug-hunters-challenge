@@ -47,6 +47,4 @@ describe("Task id: api-17", () => {
             });
         });
     });
-
-    // DEV env: no funciona el filtro limit (debería traer 2 y trae los 3)
 });

@@ -9,6 +9,4 @@ describe("Task id: api-2", () => {
             cy.instanceRunner(test);
         });
     });
-
-    // DEV env: el param search no funciona en dev
 });

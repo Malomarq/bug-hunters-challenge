@@ -26,9 +26,7 @@ describe("Task id: api-19", () => {
                         cy.createOrder({ env: test.envAPI, taskId: test.taskId, userUuid: firstUserUuid, orderItems }).then((orderResponse) => {
                             const orderUuid = orderResponse.body.uuid;
                             cy.createPayment({ env: test.envAPI, taskId: test.taskId, userUuid: firstUserUuid, orderUuid, paymentMethod: "card" }).then((createPaymentResponse) => {
-                                console.log(createPaymentResponse);
                                 const paymentUuid = createPaymentResponse.body.uuid;
-
                                 test.env = Cypress.env(`${test.envAPI}EnvUrl`);
                                 test.url = `${test.url}${paymentUuid}`;
                                 cy.instanceRunner(test);
@@ -39,6 +37,4 @@ describe("Task id: api-19", () => {
             });
         });
     });
-
-    // DEV env: en el payment no vienen los campos de updated_at ni created_at
 });

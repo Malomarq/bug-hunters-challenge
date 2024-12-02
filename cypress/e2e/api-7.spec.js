@@ -11,6 +11,7 @@ describe("Task id: api-7", () => {
 
     tests.forEach((test) => {
         it(`[${test.taskId}] - ${test.envAPI} env`, () => {
+            cy.restoreSetup({ env: test.envAPI });
             cy.wrap(buildSetup({ env: test.envAPI, taskId: test.taskId })).then(() => {
                 test.env = Cypress.env(`${test.envAPI}EnvUrl`);
                 test.requestBody = { email: users.newUser.email, password: users.newUser.password }

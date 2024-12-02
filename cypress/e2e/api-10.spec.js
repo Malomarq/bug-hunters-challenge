@@ -3,7 +3,6 @@ import { RequestManager } from "../utils/requestManager";
 
 describe("Task id: api-10", () => {
     const tests = taskAPI10;
-    let responsesToBeCompared = [];
     const requestManager = new RequestManager();
 
     tests.forEach((test) => {
@@ -17,25 +16,12 @@ describe("Task id: api-10", () => {
             }).then((response) => {
                 const categoryUuid = response.body.categories[0].uuid;
                 test.url = `${test.preRequest}/${categoryUuid}${test.lastRequest}`;
-                cy.instanceRunner(test);
-                if (test.zod.compareResponsesBetweenEnvs) {
+                cy.instanceRunner(test).then(() => {
                     cy.getStoredResponse().then((storedResponse) => {
-                        responsesToBeCompared.push(storedResponse);
-                        cy.wrap(responsesToBeCompared).as("responses");
+                        const categoryUuidFromGame = storedResponse.body.games[0].category_uuids[0];
+                        expect(categoryUuidFromGame).to.equal(categoryUuid);
                     });
-                }
-            });
-        });
-    });
-
-    after(() => {
-        tests.forEach((test) => {
-            cy.get("@responses").then((responses) => {
-                if (test.zod.compareResponsesBetweenEnvs && responsesToBeCompared.length > 1) {
-                    const releaseSelectedGame = responses[0].body.games[0].uuid;
-                    const devSelectedGame = responses[1].body.games[0].uuid;
-                    expect(releaseSelectedGame).to.equal(devSelectedGame, `Games uuids are different.\nRelease selected game uuid: ${releaseSelectedGame}. \nDev selected game uuid: ${devSelectedGame}\n`);
-                }
+                });
             });
         });
     });

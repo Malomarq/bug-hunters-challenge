@@ -14,6 +14,4 @@ describe("Task id: api-23", () => {
             });
         });
     });
-
-    // DEV env: user_uuid no existe, así que debería dar un 404. En su lugar retorna un 200 y el primer user de la lista, con un user_uuid diferente
 });

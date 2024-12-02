@@ -30,6 +30,4 @@ describe("Task id: api-13", () => {
             });
         });
     });
-
-    // DEV env: al cambiar una propiedad del item del carrito, se elimina el item completo del carrito
 });

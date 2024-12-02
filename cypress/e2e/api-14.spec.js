@@ -34,6 +34,4 @@ describe("Task id: api-14", () => {
             });
         });
     });
-
-    // DEV env: en vez de eliminar el item que se le está pasando, está eliminando todo el contenido del carrito
 });

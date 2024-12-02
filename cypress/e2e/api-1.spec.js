@@ -10,13 +10,15 @@ describe("Task id: api-1", () => {
 
     tests.forEach((test) => {
         it(`[${test.taskId}] - ${test.envAPI} env`, () => {
-            cy.wrap(buildSetup({ env: test.envAPI, taskId: test.taskId })).then(() => {
-                cy.getUserData({ env: test.envAPI, taskId: test.taskId }).then((userData) => {
+            cy.restoreSetup({ env: test.envAPI });
+            cy.createUser({ env: test.envAPI, taskId: test.taskId }).then((userData) => {
+            //cy.wrap(buildSetup({ env: test.envAPI, taskId: test.taskId })).then(() => {
+                //cy.getUserData({ env: test.envAPI, taskId: test.taskId }).then((userData) => {
                     const userUuid = userData.body.uuid;
                     test.env = Cypress.env(`${test.envAPI}EnvUrl`);
                     test.url = `${test.url}${userUuid}`;
                     cy.instanceRunner(test);
-                });
+                //});
             });
         });
     });

@@ -32,6 +32,4 @@ describe("Task id: api-18", () => {
             });
         });
     });
-
-    // DEV env: status 422: "Operation forbidden. Order \"status\": the following statuses cannot be changed: completed, canceled". Pero el status es open antes de hacer el cambio
 });

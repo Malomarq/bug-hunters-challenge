@@ -41,6 +41,4 @@ describe("Task id: api-11", () => {
             });
         });
     });
-
-    // DEV env: no se está seteando la url en el campo de avatar
 });

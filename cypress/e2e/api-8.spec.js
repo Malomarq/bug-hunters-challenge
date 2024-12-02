@@ -18,6 +18,4 @@ describe("Task id: api-8", () => {
             });
         });
     });
-
-    // DEV env: status 200 pero no está eliminando el item de la lista
 });

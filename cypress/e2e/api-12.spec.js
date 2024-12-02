@@ -26,6 +26,4 @@ describe("Task id: api-12", () => {
             });
         });
     });
-
-    // DEV env: total_price es 0, cuando en release contiene el mismo valor que item.total_price
 });

@@ -18,6 +18,4 @@ describe("Task id: api-5", () => {
             });
         });
     });
-
-    // DEV env: status 422 "Wishlist limit is reached: 10", pero sólo hay 4 items
 });

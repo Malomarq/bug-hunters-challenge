@@ -13,6 +13,4 @@ describe("Task id: api-9", () => {
             });
         });
     });
-
-    // DEV env: status 404: no funciona el filtrado, no puede encontrar un juego que previamente ha aparecido en la búsqueda general
 });

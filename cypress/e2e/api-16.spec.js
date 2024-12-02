@@ -34,6 +34,4 @@ describe("Task id: api-16", () => {
             });
         });
     });
-
-    // DEV env: en release no se puede meter items duplicados en el array de items, pero en dev sí
 });

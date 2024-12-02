@@ -26,6 +26,4 @@ describe("Task id: api-15", () => {
             });
         });
     });
-
-    // DEV env: no está vaciando el carrito. El item que añadimos permanece
 });

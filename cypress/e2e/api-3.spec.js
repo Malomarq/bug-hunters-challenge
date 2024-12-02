@@ -12,6 +12,4 @@ describe("Task id: api-3", () => {
             cy.instanceRunner(test);
         });
     });
-
-    // DEV env: no se almacena el nickname
 });

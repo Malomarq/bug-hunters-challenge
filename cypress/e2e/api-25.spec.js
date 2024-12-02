@@ -18,6 +18,4 @@ describe("Task id: api-25", () => {
             });
         });
     });
-
-    // DEV env: añade items duplicados
 });
